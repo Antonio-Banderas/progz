@@ -1,6 +1,6 @@
 const characterGalleryDiv = document.getElementById("artists-list");
 
-fetch("http://localhost:8080/artists")
+fetch(baseURL + "/artists")
     .then(response => response.json())
     .then(result => {
         result.map(createCharacterCard)
@@ -22,33 +22,41 @@ function createCharacterCard(character) {
 
 
 document.getElementById("create-new-artist-button").addEventListener("click", createNewArtist);
+
 function createNewArtist() {
+
+    console.log("Is name valid: " + document.getElementById("create-artist-name").validity.valid)
+    if (!document.getElementById("create-artist-name").validity.valid){
+        alert("Name required")
+        return;
+    }
 
     const name = document.getElementById("create-artist-name").value
     const age = document.getElementById("create-artist-age").value
     const gender = document.getElementById("create-artist-gender").value
 
-    const artist = {
+    const newArtist = {
         name: name,
         age: Number(age),
         gender: gender
     };
 
-    console.log(artist)
+    console.log(newArtist)
 
 
-    fetch("http://localhost:8080/artists", {
+    fetch(baseURL + "/artists", {
         method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(artist)
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(newArtist)
     })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result)
-            result.map(createCharacterCard)
-
-            createCharacterCard(artist)
-
-        });
+        .then(response => {
+            if (response.status === 200) {
+                createCharacterCard(newArtist);
+            } else {
+                console.log("Artist not created:", response.status);
+                alert("Artist not created.\nRespone code: " +  response.status)
+            }
+        })
+        .catch(error => alert("Network related error:\n" + error));
 
 }
