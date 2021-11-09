@@ -19,6 +19,9 @@ public class Artist {
     private Long id;
 
     @Column
+    private String image;
+
+    @Column
     private String name;
 
     @Column

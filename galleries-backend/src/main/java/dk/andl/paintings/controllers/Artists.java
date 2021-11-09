@@ -53,10 +53,9 @@ public class Artists {
     public String patchArtistById(@PathVariable Long id, @RequestBody Artist artistToUpdateWith) {
         return artists.findById(id).map(foundArtist -> {
             if (artistToUpdateWith.getName() != null) foundArtist.setName(artistToUpdateWith.getName());
+            if (artistToUpdateWith.getName() != null) foundArtist.setName(artistToUpdateWith.getName());
             if (artistToUpdateWith.getAge() != 0) foundArtist.setAge(artistToUpdateWith.getAge());
             if (artistToUpdateWith.getNationality() != null) foundArtist.setNationality(artistToUpdateWith.getNationality());
-            if (artistToUpdateWith.getPrimaryStyle() != null) foundArtist.setPrimaryStyle(artistToUpdateWith.getPrimaryStyle());
-            if (artistToUpdateWith.getBirthDate() != null) foundArtist.setBirthDate(artistToUpdateWith.getBirthDate());
             if (artistToUpdateWith.getGender() != null) foundArtist.setGender(artistToUpdateWith.getGender());
 
             artists.save(foundArtist);

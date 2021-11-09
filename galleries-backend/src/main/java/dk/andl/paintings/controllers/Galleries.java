@@ -43,6 +43,7 @@ public class Galleries {
     public String patchGalleryById(@PathVariable Long id, @RequestBody Gallery galleryToUpdateWith) {
         return galleries.findById(id).map(foundArtist -> {
             if (galleryToUpdateWith.getName() != null) foundArtist.setName(galleryToUpdateWith.getName());
+            if (galleryToUpdateWith.getName() != null) foundArtist.setName(galleryToUpdateWith.getName());
             if (galleryToUpdateWith.getOwner() != null) foundArtist.setOwner(galleryToUpdateWith.getOwner());
             if (galleryToUpdateWith.getLocation() != null) foundArtist.setLocation(galleryToUpdateWith.getLocation());
             if (galleryToUpdateWith.getSquareFeet() != 0) foundArtist.setSquareFeet(galleryToUpdateWith.getSquareFeet());
