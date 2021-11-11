@@ -38,6 +38,7 @@ function createGallery() {
         })
     }).then(response => response.json())
         .then(gallery => {
+            removeGalleryForm();
             createGalleryTableRow(gallery);
         });
 }
